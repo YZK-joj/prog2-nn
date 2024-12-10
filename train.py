@@ -46,11 +46,12 @@ for image_batch, label_batch in dataloader_test:
 
 
 model= models.MyModel()
-
+time_strat = time.time()
 acc_train = models.test_accuracy(model, dataloader_train)
+time_end = time.time()
 print(f'train accuracy:{acc_train*100:3f}%')
 acc_test = models.test_accuracy(model, dataloader_test)
-print(f'test accuracy:{acc_test*100:3f}%')
+print(f'test accuracy:{acc_test*100:3f}{time_end-time_strat}%')
 
 loss_fn = torch.nn.CrossEntropyLoss()
 
