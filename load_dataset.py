@@ -3,7 +3,6 @@ import torch
 from torchvision import datasets
 import torchvision.transforms.v2 as transforms
 
-
 ds_train = datasets.FashionMNIST(
     root='data',
     train=True,
@@ -24,6 +23,9 @@ image_tensor = transforms.functional.to_dtype(dtype=torch.float32,scale=True)
 print(image.shape, image.dtype)
 print(image.min(), image.max())
 print(image_tensor.shape, image_tensor.dtype)
+
+
+
 
 #for i in range(5):
 #    for j in range(5):
