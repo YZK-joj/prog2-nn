@@ -67,10 +67,49 @@ optimizer = torch.optim.SGD(model.parameters(),lr=learning_rata)
 n_epochs = 5
 loss_train_history =[]
 loss_test_history = []
+acc_train_history = []
+acc_test_history = []
 for k in range(n_epochs):
     print(f'epoch{k+1}/{n_epochs}')
 
-    models.train(model, dataloader_test, loss_fn, optimizer)
-    acc_test = models.test_accuracy(model, dataloader_test)
-    print(f'test accuracy:{acc_test*100:2f}%')
+    time_start =time.time()
+    loss_train = models.train(model, dataloader_train, loss_fn, optimizer)
+    time_end = time.time()
+    loss_train_history.append(loss_train)
+    print(f'train loss:{loss_train:.3f}({time_end-time_start}s)', end =',')
+    
+    time_start =time.time()
+    loss_test = models.train(model, dataloader_test, loss_fn, optimizer)
+    time_end = time.time()
+    loss_test_history.append(loss_test)
+    print(f'train loss:{loss_test:.3f}({time_end-time_start}s)',end =',')    
+    
+    if (k+1)%5==0:
+        time_start =time.time()
+        acc_train = models.train(model, dataloader_train, loss_fn, optimizer)
+        time_end = time.time()
+        acc_train_history.append(acc_train)
+        print(f'train accuracy:{acc_test*100:.3f}%({time_end-time_start}s)', end=',')
 
+        time_start =time.time()
+        acc_test = models.test_accuracy(model, dataloader_test)
+        time_end = time.time()
+        acc_test_history.append(acc_test)
+        print(f'test accuracy:{acc_test*100:.2f}%({time_end-time_start}s)',end=',')
+
+
+plt.plot(acc_train_history, label='train')
+plt.plot(acc_test_history, label='test')
+plt.xlabel('epochs')
+plt.ylabel('accuracy')
+plt.legend()
+plt.grid()
+plt.show()
+
+plt.plot(loss_train_history, label='train')
+plt.plot(loss_test_history, label='test')
+plt.xlabel('epochs')
+plt.ylabel('loss')
+plt.legend()
+plt.grid()
+plt.show()
