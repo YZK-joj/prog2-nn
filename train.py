@@ -59,8 +59,8 @@ print(f'test accuracy:{acc_test*100:3f}')
 
 loss_fn = torch.nn.CrossEntropyLoss()
 
-learning_rata = 1e-3
-optimizer = torch.optim.SGD(model.parameters(),lr=learning_rata)
+learning_rate = 1e-3
+optimizer = torch.optim.SGD(model.parameters(),lr=learning_rate)
 
 n_epochs = 5
 loss_train_history =[]
@@ -84,7 +84,7 @@ for k in range(n_epochs):
     
     if (k+1)%5==0:
         time_start =time.time()
-        acc_train = models.train(model, dataloader_train, loss_fn, optimizer, device=device)
+        acc_train = models.test_accuracy(model, dataloader_train, loss_fn, optimizer, device=device)
         time_end = time.time()
         acc_train_history.append(acc_train)
         print(f'train accuracy:{acc_test*100:.3f}%({time_end-time_start:.1f}s)', end=',')

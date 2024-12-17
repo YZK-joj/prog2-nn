@@ -17,7 +17,7 @@ class MyModel(nn.Module):
     
     def forward(self, x):
         x = self.flatten(x)
-        logits = self.networl(x)
+        logits = self.network(x)
         return logits
 
 
@@ -42,11 +42,11 @@ def test_accuracy(model, dataloader, device='cpu'):
     return accuracy
 
 
-def train(model, dataloder, loss_fn, optimizer, device='cpu'):
+def train(model, dataloader, loss_fn, optimizer, device='cpu'):
     
     model=model.to(device)
     model.train()
-    for image_batch, label_batch in dataloder:
+    for image_batch, label_batch in dataloader:
         image_batch=image_batch.to(device)
         label_batch=label_batch.to(device)
 
@@ -55,7 +55,7 @@ def train(model, dataloder, loss_fn, optimizer, device='cpu'):
 
 
         optimizer.zero_grad()
-        loss.backeard()
+        loss.backward()
         optimizer.step()
 
     return loss.item()

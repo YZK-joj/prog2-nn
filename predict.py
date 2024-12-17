@@ -10,10 +10,10 @@ model = models.MyModel()
 print(model)
 
 ds_train = datasets.FashionMNIST(
-    root= 'deta',
+    root= 'data',
     train=True,
     transform=transforms.Compose([
-        transforms.ToImage(),
+        transforms.ToTensor(),
         transforms.ToDtype(torch.float32, scale=True)])
 )
 
@@ -21,16 +21,16 @@ image, target = ds_train[0]
 
 image = image.unsqueeze(dim=0)
 
-model.evel()
+model.eval()
 with torch.no_grad():
     logits = model(image)
 
 print(logits)
 
-plt.dar(range(len(logits[0])),logits[0])
+plt.bar(range(len(logits[0])),logits[0])
 plt.show()
 
 probs = logits.softmax(dim=1)
-plt.dar(range(len(probs[0])),probs[0])
+plt.bar(range(len(probs[0])),probs[0])
 plt.ylim(0, 1)
 plt.show()
