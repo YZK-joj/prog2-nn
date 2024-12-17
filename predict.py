@@ -13,7 +13,7 @@ ds_train = datasets.FashionMNIST(
     root= 'data',
     train=True,
     transform=transforms.Compose([
-        transforms.ToTensor(),
+        transforms.ToImage(),
         transforms.ToDtype(torch.float32, scale=True)])
 )
 

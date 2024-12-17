@@ -77,14 +77,14 @@ for k in range(n_epochs):
     print(f'train loss:{loss_train:.3f}({time_end-time_start:.1f}s)', end =',')
     
     time_start =time.time()
-    loss_test = models.train(model, dataloader_test, loss_fn, device=device)
+    loss_test = models.test(model, dataloader_test, loss_fn, device=device)
     time_end = time.time()
     loss_test_history.append(loss_test)
-    print(f'train loss:{loss_test:.3f}({time_end-time_start:.1f}s)')    
+    print(f'train loss:{loss_test:.3f}({time_end-time_start:.1f}s)', end =',')    
     
     if (k+1)%5==0:
         time_start =time.time()
-        acc_train = models.test_accuracy(model, dataloader_train, loss_fn, optimizer, device=device)
+        acc_train = models.test_accuracy(model, dataloader_train,  device=device)
         time_end = time.time()
         acc_train_history.append(acc_train)
         print(f'train accuracy:{acc_test*100:.3f}%({time_end-time_start:.1f}s)', end=',')
@@ -93,7 +93,7 @@ for k in range(n_epochs):
         acc_test = models.test_accuracy(model, dataloader_test, device=device)
         time_end = time.time()
         acc_test_history.append(acc_test)
-        print(f'test accuracy:{acc_test*100:.2f}%({time_end-time_start:.1f}s)')
+        print(f'test accuracy:{acc_test*100:.3f}%({time_end-time_start:.1f}s)')
 
 
 plt.plot(acc_train_history, label='train')
