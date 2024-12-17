@@ -62,7 +62,7 @@ loss_fn = torch.nn.CrossEntropyLoss()
 learning_rate = 1e-3
 optimizer = torch.optim.SGD(model.parameters(),lr=learning_rate)
 
-n_epochs = 5
+n_epochs = 20
 loss_train_history =[]
 loss_test_history = []
 acc_train_history = []
