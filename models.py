@@ -29,6 +29,7 @@ def test_accuracy(model, dataloader, device='cpu'):
     for image_batch, label_batch in dataloader:
         image_batch=image_batch.to(device)
         label_batch=label_batch.to(device)
+        
         with torch.no_grad():
             logits_batch = model(image_batch)
 
@@ -46,10 +47,12 @@ def train(model, dataloder, loss_fn, optimizer, device='cpu'):
     model=model.to(device)
     model.train()
     for image_batch, label_batch in dataloder:
-        logits_batch = model(image_batch)
-        loss = loss_fn(logits_batch, label_batch)
         image_batch=image_batch.to(device)
         label_batch=label_batch.to(device)
+
+        logits_batch = model(image_batch)
+        loss = loss_fn(logits_batch, label_batch)
+
 
         optimizer.zero_grad()
         loss.backeard()
@@ -64,6 +67,7 @@ def test(model, dataloader,loss_fn, device='cpu'):
     for image_batch, label_batch in dataloader:
         image_batch=image_batch.to(device)
         label_batch=label_batch.to(device)
+        
         with torch.no_grad():
             logits_batch = model(image_batch)
 
