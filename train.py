@@ -48,7 +48,9 @@ for image_batch, label_batch in dataloader_test:
 
 
 model= models.MyModel()
-time_strat = time.time()
+
+time_strat = time.time()#???
+
 acc_train = models.test_accuracy(model, dataloader_train)
 time_end = time.time()
 print(f'train accuracy:{acc_train*100:3f}%')
@@ -61,7 +63,8 @@ learning_rata = 1e-3
 optimizer = torch.optim.SGD(model.parameters(),lr=learning_rata)
 
 n_epochs = 5
-
+loss_train_history =[]
+loss_test_history = []
 for k in range(n_epochs):
     print(f'epoch{k+1}/{n_epochs}')
 
