@@ -64,6 +64,7 @@ def test(model, dataloader,loss_fn, device='cpu'):
     
     model=model.to(device)
     model.eval()
+    loss_total = 0.0
     for image_batch, label_batch in dataloader:
         image_batch=image_batch.to(device)
         label_batch=label_batch.to(device)
